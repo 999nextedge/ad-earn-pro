@@ -72,6 +72,122 @@
             transform: translateX(-100%);
         }
 
+        .mobile-menu-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 999;
+        }
+
+        .mobile-menu-overlay.show {
+            display: block;
+        }
+
+        .mobile-sidebar {
+            position: fixed;
+            top: 0;
+            left: -100%;
+            width: 280px;
+            height: 100vh;
+            background: white;
+            z-index: 1000;
+            transition: left 0.3s ease;
+            overflow-y: auto;
+        }
+
+        .mobile-sidebar.show {
+            left: 0;
+        }
+
+        .mobile-nav {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .desktop-nav {
+                display: none;
+            }
+            
+            .mobile-nav {
+                display: flex;
+            }
+            
+            .sidebar {
+                display: none;
+            }
+            
+            .dashboard-content {
+                margin-left: 0 !important;
+            }
+            
+            .hero-title {
+                font-size: 2.5rem !important;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.25rem !important;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr) !important;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr !important;
+            }
+            
+            .modal .bg-white {
+                margin: 1rem;
+                max-width: calc(100vw - 2rem);
+            }
+            
+            .dashboard-grid {
+                grid-template-columns: 1fr !important;
+            }
+            
+            .ad-player-section {
+                order: -1;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-title {
+                font-size: 2rem !important;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr !important;
+            }
+            
+            .button-group {
+                flex-direction: column !important;
+            }
+            
+            .button-group button {
+                width: 100% !important;
+                margin-bottom: 0.5rem;
+            }
+        }
+
+        .touch-friendly {
+            min-height: 48px;
+            min-width: 48px;
+        }
+
+        .mobile-optimized {
+            padding: 1rem;
+        }
+
+        @media (min-width: 1200px) {
+            .container-xl {
+                max-width: 1200px;
+            }
+        }
+
         .ad-video {
             width: 100%;
             height: 300px;
@@ -202,17 +318,31 @@
                             <span class="text-sm text-gray-600">Live Platform</span>
                         </div>
                     </div>
-                    <div class="hidden md:flex space-x-8">
+                    
+                    <!-- Desktop Navigation -->
+                    <div class="hidden md:flex space-x-8 desktop-nav">
                         <a href="#features" class="text-gray-700 hover:text-indigo-600 transition-colors">Features</a>
                         <a href="#how-it-works" class="text-gray-700 hover:text-indigo-600 transition-colors">How It Works</a>
                         <a href="#security" class="text-gray-700 hover:text-indigo-600 transition-colors">Security</a>
                         <a href="#deposit" class="text-gray-700 hover:text-indigo-600 transition-colors">Deposit</a>
                     </div>
-                    <div class="flex space-x-4">
-                        <button onclick="showLogin()" class="bg-indigo-600 text-white px-6 py-2 rounded-lg hover:bg-indigo-700 transition-colors">
+                    
+                    <!-- Desktop Buttons -->
+                    <div class="hidden md:flex space-x-4 desktop-nav">
+                        <button onclick="showLogin()" class="bg-indigo-600 text-white px-6 py-2 rounded-lg hover:bg-indigo-700 transition-colors touch-friendly">
                             Login
                         </button>
-                        <button onclick="showSignup()" class="border border-indigo-600 text-indigo-600 px-6 py-2 rounded-lg hover:bg-indigo-50 transition-colors">
+                        <button onclick="showSignup()" class="border border-indigo-600 text-indigo-600 px-6 py-2 rounded-lg hover:bg-indigo-50 transition-colors touch-friendly">
+                            Sign Up
+                        </button>
+                    </div>
+                    
+                    <!-- Mobile Navigation -->
+                    <div class="md:hidden mobile-nav items-center space-x-2">
+                        <button onclick="showLogin()" class="bg-indigo-600 text-white px-4 py-2 rounded-lg text-sm touch-friendly">
+                            Login
+                        </button>
+                        <button onclick="showSignup()" class="border border-indigo-600 text-indigo-600 px-4 py-2 rounded-lg text-sm touch-friendly">
                             Sign Up
                         </button>
                     </div>
@@ -222,42 +352,42 @@
 
         <!-- Hero Section -->
         <section class="gradient-bg text-white pt-24 pb-16">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mobile-optimized">
                 <div class="text-center">
-                    <h1 class="text-5xl md:text-6xl font-bold mb-6">
+                    <h1 class="hero-title text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
                         Professional Ad Viewing
                         <span class="text-yellow-300">Platform</span>
                     </h1>
-                    <p class="text-xl md:text-2xl mb-8 text-gray-200 max-w-3xl mx-auto">
+                    <p class="hero-subtitle text-lg sm:text-xl md:text-2xl mb-8 text-gray-200 max-w-3xl mx-auto">
                         Secure, transparent, and compliant platform for earning through verified advertisements. 
                         Professional-grade security with instant bKash deposits.
                     </p>
-                    <div class="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
-                        <button onclick="showSignup()" class="bg-yellow-400 text-gray-900 px-8 py-4 rounded-lg text-lg font-semibold hover:bg-yellow-300 transition-colors pulse-animation">
+                    <div class="button-group flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
+                        <button onclick="showSignup()" class="bg-yellow-400 text-gray-900 px-6 sm:px-8 py-3 sm:py-4 rounded-lg text-base sm:text-lg font-semibold hover:bg-yellow-300 transition-colors pulse-animation touch-friendly w-full sm:w-auto">
                             Start Earning Today
                         </button>
-                        <button onclick="showLogin()" class="border-2 border-white text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-white hover:text-gray-900 transition-colors">
+                        <button onclick="showLogin()" class="border-2 border-white text-white px-6 sm:px-8 py-3 sm:py-4 rounded-lg text-base sm:text-lg font-semibold hover:bg-white hover:text-gray-900 transition-colors touch-friendly w-full sm:w-auto">
                             Login to Platform
                         </button>
                     </div>
                     
                     <!-- Live Stats -->
-                    <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mt-16">
+                    <div class="stats-grid grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-8 mt-16">
                         <div class="text-center">
-                            <div class="text-4xl font-bold text-yellow-300 earnings-counter" id="totalPayout">$127,450</div>
-                            <div class="text-gray-200">Total Paid Out</div>
+                            <div class="text-2xl sm:text-3xl md:text-4xl font-bold text-yellow-300 earnings-counter" id="totalPayout">$127,450</div>
+                            <div class="text-gray-200 text-sm sm:text-base">Total Paid Out</div>
                         </div>
                         <div class="text-center">
-                            <div class="text-4xl font-bold text-yellow-300" id="activeUsers">15,247</div>
-                            <div class="text-gray-200">Active Users</div>
+                            <div class="text-2xl sm:text-3xl md:text-4xl font-bold text-yellow-300" id="activeUsers">15,247</div>
+                            <div class="text-gray-200 text-sm sm:text-base">Active Users</div>
                         </div>
                         <div class="text-center">
-                            <div class="text-4xl font-bold text-yellow-300">99.9%</div>
-                            <div class="text-gray-200">Platform Uptime</div>
+                            <div class="text-2xl sm:text-3xl md:text-4xl font-bold text-yellow-300">99.9%</div>
+                            <div class="text-gray-200 text-sm sm:text-base">Platform Uptime</div>
                         </div>
                         <div class="text-center">
-                            <div class="text-4xl font-bold text-yellow-300" id="adsToday">8,934</div>
-                            <div class="text-gray-200">Ads Viewed Today</div>
+                            <div class="text-2xl sm:text-3xl md:text-4xl font-bold text-yellow-300" id="adsToday">8,934</div>
+                            <div class="text-gray-200 text-sm sm:text-base">Ads Viewed Today</div>
                         </div>
                     </div>
                 </div>
@@ -274,50 +404,50 @@
                     </p>
                 </div>
                 
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <div class="bg-gray-50 p-8 rounded-xl card-hover">
+                <div class="features-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+                    <div class="bg-gray-50 p-6 lg:p-8 rounded-xl card-hover">
                         <div class="flex items-center mb-4">
-                            <div class="text-4xl mr-3 feature-icon">💰</div>
+                            <div class="text-3xl lg:text-4xl mr-3 feature-icon">💰</div>
                             <span class="premium-badge">Premium</span>
                         </div>
-                        <h3 class="text-xl font-semibold mb-3 text-gray-900">Guaranteed Payouts</h3>
-                        <p class="text-gray-600">Earn $0.05-$0.25 per verified ad view. Minimum withdrawal of $50 with transparent processing.</p>
+                        <h3 class="text-lg lg:text-xl font-semibold mb-3 text-gray-900">Guaranteed Payouts</h3>
+                        <p class="text-gray-600 text-sm lg:text-base">Earn $0.05-$0.25 per verified ad view. Minimum withdrawal of $50 with transparent processing.</p>
                     </div>
                     
-                    <div class="bg-gray-50 p-8 rounded-xl card-hover">
+                    <div class="bg-gray-50 p-6 lg:p-8 rounded-xl card-hover">
                         <div class="flex items-center mb-4">
-                            <div class="text-4xl mr-3 feature-icon">🔒</div>
+                            <div class="text-3xl lg:text-4xl mr-3 feature-icon">🔒</div>
                             <span class="verified-badge">Verified</span>
                         </div>
-                        <h3 class="text-xl font-semibold mb-3 text-gray-900">Bank-Level Security</h3>
-                        <p class="text-gray-600">Advanced fraud detection, KYC verification, and secure wallet management with SSL encryption.</p>
+                        <h3 class="text-lg lg:text-xl font-semibold mb-3 text-gray-900">Bank-Level Security</h3>
+                        <p class="text-gray-600 text-sm lg:text-base">Advanced fraud detection, KYC verification, and secure wallet management with SSL encryption.</p>
                     </div>
                     
-                    <div class="bg-gray-50 p-8 rounded-xl card-hover">
-                        <div class="text-4xl mb-4 feature-icon">📱</div>
-                        <h3 class="text-xl font-semibold mb-3 text-gray-900">bKash Integration</h3>
-                        <p class="text-gray-600">Instant deposits via bKash Send Money. Secure and verified transactions with real-time processing.</p>
+                    <div class="bg-gray-50 p-6 lg:p-8 rounded-xl card-hover">
+                        <div class="text-3xl lg:text-4xl mb-4 feature-icon">📱</div>
+                        <h3 class="text-lg lg:text-xl font-semibold mb-3 text-gray-900">bKash Integration</h3>
+                        <p class="text-gray-600 text-sm lg:text-base">Instant deposits via bKash Send Money. Secure and verified transactions with real-time processing.</p>
                     </div>
                     
-                    <div class="bg-gray-50 p-8 rounded-xl card-hover">
+                    <div class="bg-gray-50 p-6 lg:p-8 rounded-xl card-hover">
                         <div class="flex items-center mb-4">
-                            <div class="text-4xl mr-3 feature-icon">✅</div>
+                            <div class="text-3xl lg:text-4xl mr-3 feature-icon">✅</div>
                             <span class="verified-badge">Verified</span>
                         </div>
-                        <h3 class="text-xl font-semibold mb-3 text-gray-900">Premium Advertisers</h3>
-                        <p class="text-gray-600">Only premium ads from Fortune 500 companies and verified partners. Quality content guaranteed.</p>
+                        <h3 class="text-lg lg:text-xl font-semibold mb-3 text-gray-900">Premium Advertisers</h3>
+                        <p class="text-gray-600 text-sm lg:text-base">Only premium ads from Fortune 500 companies and verified partners. Quality content guaranteed.</p>
                     </div>
                     
-                    <div class="bg-gray-50 p-8 rounded-xl card-hover">
-                        <div class="text-4xl mb-4 feature-icon">📊</div>
-                        <h3 class="text-xl font-semibold mb-3 text-gray-900">Complete Transparency</h3>
-                        <p class="text-gray-600">Track every transaction, view proof-of-view receipts, and monitor earnings in real-time dashboard.</p>
+                    <div class="bg-gray-50 p-6 lg:p-8 rounded-xl card-hover">
+                        <div class="text-3xl lg:text-4xl mb-4 feature-icon">📊</div>
+                        <h3 class="text-lg lg:text-xl font-semibold mb-3 text-gray-900">Complete Transparency</h3>
+                        <p class="text-gray-600 text-sm lg:text-base">Track every transaction, view proof-of-view receipts, and monitor earnings in real-time dashboard.</p>
                     </div>
                     
-                    <div class="bg-gray-50 p-8 rounded-xl card-hover">
-                        <div class="text-4xl mb-4 feature-icon">🌍</div>
-                        <h3 class="text-xl font-semibold mb-3 text-gray-900">Global Platform</h3>
-                        <p class="text-gray-600">Multi-currency support with USD and BDT. Seamless local payment integration worldwide.</p>
+                    <div class="bg-gray-50 p-6 lg:p-8 rounded-xl card-hover">
+                        <div class="text-3xl lg:text-4xl mb-4 feature-icon">🌍</div>
+                        <h3 class="text-lg lg:text-xl font-semibold mb-3 text-gray-900">Global Platform</h3>
+                        <p class="text-gray-600 text-sm lg:text-base">Multi-currency support with USD and BDT. Seamless local payment integration worldwide.</p>
                     </div>
                 </div>
             </div>
@@ -704,40 +834,88 @@
         </div>
     </div>
 
+    <!-- Mobile Menu Overlay -->
+    <div id="mobileMenuOverlay" class="mobile-menu-overlay"></div>
+
+    <!-- Mobile Sidebar -->
+    <div id="mobileSidebar" class="mobile-sidebar">
+        <div class="p-6">
+            <div class="flex justify-between items-center mb-6">
+                <div>
+                    <div class="text-2xl font-bold text-indigo-600">AdEarn Pro</div>
+                    <div class="text-sm text-gray-500">Professional Platform</div>
+                </div>
+                <button onclick="closeMobileMenu()" class="text-gray-500 hover:text-gray-700 touch-friendly">
+                    <span class="text-2xl">×</span>
+                </button>
+            </div>
+            <nav class="space-y-2">
+                <a href="#" onclick="showUserSection('dashboard'); closeMobileMenu()" class="flex items-center space-x-3 text-gray-700 p-3 rounded-lg hover:bg-gray-100 user-nav-item active touch-friendly">
+                    <span>📊</span>
+                    <span>Dashboard</span>
+                </a>
+                <a href="#" onclick="showUserSection('viewads'); closeMobileMenu()" class="flex items-center space-x-3 text-gray-700 p-3 rounded-lg hover:bg-gray-100 user-nav-item touch-friendly">
+                    <span>📺</span>
+                    <span>View Ads</span>
+                </a>
+                <a href="#" onclick="showUserSection('deposit'); closeMobileMenu()" class="flex items-center space-x-3 text-gray-700 p-3 rounded-lg hover:bg-gray-100 user-nav-item touch-friendly">
+                    <span>💳</span>
+                    <span>Deposit</span>
+                </a>
+                <a href="#" onclick="showUserSection('withdraw'); closeMobileMenu()" class="flex items-center space-x-3 text-gray-700 p-3 rounded-lg hover:bg-gray-100 user-nav-item touch-friendly">
+                    <span>💰</span>
+                    <span>Withdraw</span>
+                </a>
+                <a href="#" onclick="showUserSection('history'); closeMobileMenu()" class="flex items-center space-x-3 text-gray-700 p-3 rounded-lg hover:bg-gray-100 user-nav-item touch-friendly">
+                    <span>📋</span>
+                    <span>History</span>
+                </a>
+                <a href="#" onclick="showUserSection('referral'); closeMobileMenu()" class="flex items-center space-x-3 text-gray-700 p-3 rounded-lg hover:bg-gray-100 user-nav-item touch-friendly">
+                    <span>👥</span>
+                    <span>Referrals</span>
+                </a>
+                <a href="#" onclick="logout()" class="flex items-center space-x-3 text-red-600 p-3 rounded-lg hover:bg-red-50 touch-friendly">
+                    <span>🚪</span>
+                    <span>Logout</span>
+                </a>
+            </nav>
+        </div>
+    </div>
+
     <!-- User Dashboard -->
     <div id="userDashboard" class="page">
         <div class="flex h-screen bg-gray-100">
-            <!-- Sidebar -->
-            <div class="w-64 bg-white shadow-lg">
+            <!-- Desktop Sidebar -->
+            <div class="hidden md:block w-64 bg-white shadow-lg sidebar">
                 <div class="p-6">
                     <div class="text-2xl font-bold text-indigo-600 mb-2">AdEarn Pro</div>
                     <div class="text-sm text-gray-500 mb-8">Professional Platform</div>
                     <nav class="space-y-2">
-                        <a href="#" onclick="showUserSection('dashboard')" class="flex items-center space-x-3 text-gray-700 p-3 rounded-lg hover:bg-gray-100 user-nav-item active">
+                        <a href="#" onclick="showUserSection('dashboard')" class="flex items-center space-x-3 text-gray-700 p-3 rounded-lg hover:bg-gray-100 user-nav-item active touch-friendly">
                             <span>📊</span>
                             <span>Dashboard</span>
                         </a>
-                        <a href="#" onclick="showUserSection('viewads')" class="flex items-center space-x-3 text-gray-700 p-3 rounded-lg hover:bg-gray-100 user-nav-item">
+                        <a href="#" onclick="showUserSection('viewads')" class="flex items-center space-x-3 text-gray-700 p-3 rounded-lg hover:bg-gray-100 user-nav-item touch-friendly">
                             <span>📺</span>
                             <span>View Ads</span>
                         </a>
-                        <a href="#" onclick="showUserSection('deposit')" class="flex items-center space-x-3 text-gray-700 p-3 rounded-lg hover:bg-gray-100 user-nav-item">
+                        <a href="#" onclick="showUserSection('deposit')" class="flex items-center space-x-3 text-gray-700 p-3 rounded-lg hover:bg-gray-100 user-nav-item touch-friendly">
                             <span>💳</span>
                             <span>Deposit</span>
                         </a>
-                        <a href="#" onclick="showUserSection('withdraw')" class="flex items-center space-x-3 text-gray-700 p-3 rounded-lg hover:bg-gray-100 user-nav-item">
+                        <a href="#" onclick="showUserSection('withdraw')" class="flex items-center space-x-3 text-gray-700 p-3 rounded-lg hover:bg-gray-100 user-nav-item touch-friendly">
                             <span>💰</span>
                             <span>Withdraw</span>
                         </a>
-                        <a href="#" onclick="showUserSection('history')" class="flex items-center space-x-3 text-gray-700 p-3 rounded-lg hover:bg-gray-100 user-nav-item">
+                        <a href="#" onclick="showUserSection('history')" class="flex items-center space-x-3 text-gray-700 p-3 rounded-lg hover:bg-gray-100 user-nav-item touch-friendly">
                             <span>📋</span>
                             <span>History</span>
                         </a>
-                        <a href="#" onclick="showUserSection('referral')" class="flex items-center space-x-3 text-gray-700 p-3 rounded-lg hover:bg-gray-100 user-nav-item">
+                        <a href="#" onclick="showUserSection('referral')" class="flex items-center space-x-3 text-gray-700 p-3 rounded-lg hover:bg-gray-100 user-nav-item touch-friendly">
                             <span>👥</span>
                             <span>Referrals</span>
                         </a>
-                        <a href="#" onclick="logout()" class="flex items-center space-x-3 text-red-600 p-3 rounded-lg hover:bg-red-50">
+                        <a href="#" onclick="logout()" class="flex items-center space-x-3 text-red-600 p-3 rounded-lg hover:bg-red-50 touch-friendly">
                             <span>🚪</span>
                             <span>Logout</span>
                         </a>
@@ -746,70 +924,76 @@
             </div>
 
             <!-- Main Content -->
-            <div class="flex-1 overflow-auto">
+            <div class="flex-1 overflow-auto dashboard-content">
                 <!-- Top Bar -->
                 <div class="bg-white shadow-sm border-b border-gray-200 p-4">
                     <div class="flex justify-between items-center">
-                        <div>
-                            <h1 class="text-2xl font-bold text-gray-900">Welcome back, <span id="userName">User</span>!</h1>
-                            <p class="text-gray-600">Track your earnings and manage your account</p>
-                        </div>
-                        <div class="flex items-center space-x-4">
-                            <div class="text-right">
-                                <div class="text-sm text-gray-500">Current Balance</div>
-                                <div class="text-2xl font-bold text-green-600 earnings-counter">$<span id="topBalance">0.00</span></div>
+                        <div class="flex items-center">
+                            <!-- Mobile Menu Button -->
+                            <button onclick="openMobileMenu()" class="md:hidden mr-3 text-gray-500 hover:text-gray-700 touch-friendly">
+                                <span class="text-2xl">☰</span>
+                            </button>
+                            <div>
+                                <h1 class="text-lg sm:text-xl lg:text-2xl font-bold text-gray-900">Welcome back, <span id="userName">User</span>!</h1>
+                                <p class="text-gray-600 text-sm sm:text-base hidden sm:block">Track your earnings and manage your account</p>
                             </div>
-                            <div class="w-12 h-12 bg-indigo-600 rounded-full flex items-center justify-center text-white font-bold text-lg" id="userAvatar">U</div>
+                        </div>
+                        <div class="flex items-center space-x-2 sm:space-x-4">
+                            <div class="text-right">
+                                <div class="text-xs sm:text-sm text-gray-500">Current Balance</div>
+                                <div class="text-lg sm:text-xl lg:text-2xl font-bold text-green-600 earnings-counter">$<span id="topBalance">0.00</span></div>
+                            </div>
+                            <div class="w-10 h-10 sm:w-12 sm:h-12 bg-indigo-600 rounded-full flex items-center justify-center text-white font-bold text-sm sm:text-lg" id="userAvatar">U</div>
                         </div>
                     </div>
                 </div>
 
-                <div class="p-8">
+                <div class="p-4 sm:p-6 lg:p-8">
                     <!-- User Dashboard Section -->
                     <div id="userDashboardSection" class="user-section">
                         <!-- Stats Cards -->
-                        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-                            <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
+                        <div class="dashboard-grid grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-6 sm:mb-8">
+                            <div class="bg-white p-4 sm:p-6 rounded-xl shadow-sm border border-gray-200">
                                 <div class="flex items-center justify-between">
                                     <div>
-                                        <p class="text-sm text-gray-600">Total Balance</p>
-                                        <p class="text-2xl font-bold text-gray-900 earnings-counter">$<span id="userBalance">0.00</span></p>
+                                        <p class="text-xs sm:text-sm text-gray-600">Total Balance</p>
+                                        <p class="text-lg sm:text-xl lg:text-2xl font-bold text-gray-900 earnings-counter">$<span id="userBalance">0.00</span></p>
                                         <p class="text-xs text-green-600 mt-1">+$5.00 welcome bonus</p>
                                     </div>
-                                    <div class="text-3xl">💰</div>
+                                    <div class="text-2xl sm:text-3xl">💰</div>
                                 </div>
                             </div>
                             
-                            <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
+                            <div class="bg-white p-4 sm:p-6 rounded-xl shadow-sm border border-gray-200">
                                 <div class="flex items-center justify-between">
                                     <div>
-                                        <p class="text-sm text-gray-600">Ads Watched</p>
-                                        <p class="text-2xl font-bold text-gray-900"><span id="adsWatched">0</span></p>
+                                        <p class="text-xs sm:text-sm text-gray-600">Ads Watched</p>
+                                        <p class="text-lg sm:text-xl lg:text-2xl font-bold text-gray-900"><span id="adsWatched">0</span></p>
                                         <p class="text-xs text-blue-600 mt-1">Premium ads available</p>
                                     </div>
-                                    <div class="text-3xl">📺</div>
+                                    <div class="text-2xl sm:text-3xl">📺</div>
                                 </div>
                             </div>
                             
-                            <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
+                            <div class="bg-white p-4 sm:p-6 rounded-xl shadow-sm border border-gray-200">
                                 <div class="flex items-center justify-between">
                                     <div>
-                                        <p class="text-sm text-gray-600">Today's Earnings</p>
-                                        <p class="text-2xl font-bold text-green-600 earnings-counter">$<span id="todayEarnings">0.00</span></p>
+                                        <p class="text-xs sm:text-sm text-gray-600">Today's Earnings</p>
+                                        <p class="text-lg sm:text-xl lg:text-2xl font-bold text-green-600 earnings-counter">$<span id="todayEarnings">0.00</span></p>
                                         <p class="text-xs text-gray-500 mt-1">Last 24 hours</p>
                                     </div>
-                                    <div class="text-3xl">📈</div>
+                                    <div class="text-2xl sm:text-3xl">📈</div>
                                 </div>
                             </div>
                             
-                            <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
+                            <div class="bg-white p-4 sm:p-6 rounded-xl shadow-sm border border-gray-200">
                                 <div class="flex items-center justify-between">
                                     <div>
-                                        <p class="text-sm text-gray-600">Account Status</p>
-                                        <p class="text-lg font-semibold text-green-600">Active</p>
+                                        <p class="text-xs sm:text-sm text-gray-600">Account Status</p>
+                                        <p class="text-sm sm:text-lg font-semibold text-green-600">Active</p>
                                         <p class="text-xs text-gray-500 mt-1">KYC Verified</p>
                                     </div>
-                                    <div class="text-3xl">✅</div>
+                                    <div class="text-2xl sm:text-3xl">✅</div>
                                 </div>
                             </div>
                         </div>
@@ -922,25 +1106,25 @@
                             </div>
                         </div>
 
-                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                        <div class="dashboard-grid grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8">
                             <!-- Available Ads -->
-                            <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+                            <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-4 sm:p-6">
                                 <div class="flex justify-between items-center mb-4">
-                                    <h3 class="text-xl font-semibold">Available Ads</h3>
+                                    <h3 class="text-lg sm:text-xl font-semibold">Available Ads</h3>
                                     <span class="live-indicator"></span>
                                 </div>
-                                <div id="availableAds" class="space-y-4">
+                                <div id="availableAds" class="space-y-3 sm:space-y-4">
                                     <!-- Ads will be populated by JavaScript -->
                                 </div>
                             </div>
 
                             <!-- Ad Player -->
-                            <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-                                <h3 class="text-xl font-semibold mb-4">Ad Player</h3>
+                            <div class="ad-player-section bg-white rounded-xl shadow-sm border border-gray-200 p-4 sm:p-6">
+                                <h3 class="text-lg sm:text-xl font-semibold mb-4">Ad Player</h3>
                                 <div id="adPlayer" class="text-center text-gray-500">
-                                    <div class="text-6xl mb-4">📺</div>
-                                    <p class="text-lg font-medium mb-2">Ready to Earn</p>
-                                    <p>Select a premium ad to start watching and earning</p>
+                                    <div class="text-4xl sm:text-5xl lg:text-6xl mb-4">📺</div>
+                                    <p class="text-base sm:text-lg font-medium mb-2">Ready to Earn</p>
+                                    <p class="text-sm sm:text-base">Select a premium ad to start watching and earning</p>
                                 </div>
                             </div>
                         </div>
@@ -1427,6 +1611,22 @@
             { id: 10, title: "Adidas Ultraboost 23", company: "Adidas AG", duration: 22, reward: 0.10, category: "Sports", verified: true }
         ];
 
+        // Mobile menu functions
+        function openMobileMenu() {
+            document.getElementById('mobileMenuOverlay').classList.add('show');
+            document.getElementById('mobileSidebar').classList.add('show');
+        }
+
+        function closeMobileMenu() {
+            document.getElementById('mobileMenuOverlay').classList.remove('show');
+            document.getElementById('mobileSidebar').classList.remove('show');
+        }
+
+        // Close mobile menu when clicking overlay
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('mobileMenuOverlay').addEventListener('click', closeMobileMenu);
+        });
+
         // Utility functions
         function showPage(pageId) {
             document.querySelectorAll('.page').forEach(page => {
@@ -1550,24 +1750,24 @@
             if (!container) return;
             
             container.innerHTML = premiumAds.map(ad => `
-                <div class="border border-gray-200 rounded-lg p-4 hover:bg-gray-50 cursor-pointer transition-colors" onclick="selectAd(${ad.id})">
+                <div class="border border-gray-200 rounded-lg p-3 sm:p-4 hover:bg-gray-50 cursor-pointer transition-colors touch-friendly" onclick="selectAd(${ad.id})">
                     <div class="flex justify-between items-start mb-2">
-                        <div class="flex-1">
-                            <div class="flex items-center space-x-2 mb-1">
-                                <h4 class="font-semibold text-gray-900">${ad.title}</h4>
-                                ${ad.verified ? '<span class="verified-badge">Verified</span>' : ''}
+                        <div class="flex-1 min-w-0">
+                            <div class="flex items-center space-x-2 mb-1 flex-wrap">
+                                <h4 class="font-semibold text-gray-900 text-sm sm:text-base truncate">${ad.title}</h4>
+                                ${ad.verified ? '<span class="verified-badge text-xs">Verified</span>' : ''}
                             </div>
-                            <p class="text-sm text-gray-600">${ad.company}</p>
+                            <p class="text-xs sm:text-sm text-gray-600 truncate">${ad.company}</p>
                             <p class="text-xs text-gray-500">${ad.category}</p>
                         </div>
-                        <div class="text-right">
-                            <div class="text-lg font-bold text-green-600">$${ad.reward.toFixed(2)}</div>
+                        <div class="text-right ml-2">
+                            <div class="text-sm sm:text-lg font-bold text-green-600">$${ad.reward.toFixed(2)}</div>
                             <div class="text-xs text-gray-500">${ad.duration}s</div>
                         </div>
                     </div>
                     <div class="flex items-center justify-between">
                         <span class="text-xs text-indigo-600">Premium Ad</span>
-                        <button class="text-xs bg-indigo-600 text-white px-3 py-1 rounded-full hover:bg-indigo-700 transition-colors">
+                        <button class="text-xs bg-indigo-600 text-white px-3 py-1 rounded-full hover:bg-indigo-700 transition-colors touch-friendly">
                             Watch Now
                         </button>
                     </div>
@@ -1843,5 +2043,5 @@
             updateLiveStats();
         });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'988bf05ea58ab6db',t:'MTc1OTQ4OTI1OS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'988c46e2d7d0b6db',t:'MTc1OTQ5MjgwNC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
