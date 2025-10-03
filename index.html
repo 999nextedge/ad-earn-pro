@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AdEarn Pro - Professional Ad Viewing Platform</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            box-sizing: border-box;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .card-hover {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        
+        .pulse-animation {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        
+        .feature-icon {
+            background: linear-gradient(135deg, #4f46e5, #7c3aed);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+        }
+
+        .modal.show {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg fixed w-full top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <div class="text-2xl font-bold text-indigo-600">AdEarn Pro</div>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#features" class="text-gray-700 hover:text-indigo-600 transition-colors">Features</a>
+                    <a href="#how-it-works" class="text-gray-700 hover:text-indigo-600 transition-colors">How It Works</a>
+                    <a href="#security" class="text-gray-700 hover:text-indigo-600 transition-colors">Security</a>
+                    <a href="#deposit" class="text-gray-700 hover:text-indigo-600 transition-colors">Deposit</a>
+                    <a href="#contact" class="text-gray-700 hover:text-indigo-600 transition-colors">Contact</a>
+                </div>
+                <div class="flex space-x-4">
+                    <button id="depositBtn" class="bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700 transition-colors">
+                        Deposit Now
+                    </button>
+                    <button class="border border-indigo-600 text-indigo-600 px-6 py-2 rounded-lg hover:bg-indigo-50 transition-colors">
+                        Dashboard
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="gradient-bg text-white pt-24 pb-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <h1 class="text-5xl md:text-6xl font-bold mb-6">
+                    Professional Ad Viewing
+                    <span class="text-yellow-300">Platform</span>
+                </h1>
+                <p class="text-xl md:text-2xl mb-8 text-gray-200 max-w-3xl mx-auto">
+                    Secure, transparent, and compliant platform for earning through verified advertisements. 
+                    Professional-grade security with instant bKash deposits.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
+                    <button id="heroDepositBtn" class="bg-yellow-400 text-gray-900 px-8 py-4 rounded-lg text-lg font-semibold hover:bg-yellow-300 transition-colors pulse-animation">
+                        Start Earning Today
+                    </button>
+                    <button class="border-2 border-white text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-white hover:text-gray-900 transition-colors">
+                        View Platform
+                    </button>
+                </div>
+                
+                <!-- Stats -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16">
+                    <div class="text-center">
+                        <div class="text-4xl font-bold text-yellow-300">$50K+</div>
+                        <div class="text-gray-200">Total Paid Out</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-4xl font-bold text-yellow-300">10K+</div>
+                        <div class="text-gray-200">Active Users</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-4xl font-bold text-yellow-300">99.9%</div>
+                        <div class="text-gray-200">Platform Uptime</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">Professional Platform Features</h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+                    Enterprise-grade security meets user-friendly earning opportunities
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Feature 1 -->
+                <div class="bg-gray-50 p-8 rounded-xl card-hover">
+                    <div class="text-4xl mb-4 feature-icon">💰</div>
+                    <h3 class="text-xl font-semibold mb-3 text-gray-900">Guaranteed Payouts</h3>
+                    <p class="text-gray-600">Earn $0.05 per verified ad view. Minimum withdrawal of $50 with transparent processing.</p>
+                </div>
+                
+                <!-- Feature 2 -->
+                <div class="bg-gray-50 p-8 rounded-xl card-hover">
+                    <div class="text-4xl mb-4 feature-icon">🔒</div>
+                    <h3 class="text-xl font-semibold mb-3 text-gray-900">Bank-Level Security</h3>
+                    <p class="text-gray-600">Advanced fraud detection, KYC verification, and secure wallet management.</p>
+                </div>
+                
+                <!-- Feature 3 -->
+                <div class="bg-gray-50 p-8 rounded-xl card-hover">
+                    <div class="text-4xl mb-4 feature-icon">📱</div>
+                    <h3 class="text-xl font-semibold mb-3 text-gray-900">bKash Integration</h3>
+                    <p class="text-gray-600">Instant deposits via bKash Send Money. Secure and verified transactions.</p>
+                </div>
+                
+                <!-- Feature 4 -->
+                <div class="bg-gray-50 p-8 rounded-xl card-hover">
+                    <div class="text-4xl mb-4 feature-icon">✅</div>
+                    <h3 class="text-xl font-semibold mb-3 text-gray-900">Verified Advertisers</h3>
+                    <p class="text-gray-600">Only premium ads from trusted, verified partners. Quality content guaranteed.</p>
+                </div>
+                
+                <!-- Feature 5 -->
+                <div class="bg-gray-50 p-8 rounded-xl card-hover">
+                    <div class="text-4xl mb-4 feature-icon">📊</div>
+                    <h3 class="text-xl font-semibold mb-3 text-gray-900">Complete Transparency</h3>
+                    <p class="text-gray-600">Track every transaction, view proof-of-view receipts, and monitor earnings in real-time.</p>
+                </div>
+                
+                <!-- Feature 6 -->
+                <div class="bg-gray-50 p-8 rounded-xl card-hover">
+                    <div class="text-4xl mb-4 feature-icon">🌍</div>
+                    <h3 class="text-xl font-semibold mb-3 text-gray-900">Multi-Currency Support</h3>
+                    <p class="text-gray-600">View balances in USD and BDT. Seamless local payment integration.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Deposit Section -->
+    <section id="deposit" class="py-20 bg-gray-50">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">Quick bKash Deposit</h2>
+                <p class="text-xl text-gray-600">Start earning immediately with instant bKash deposits</p>
+            </div>
+            
+            <div class="bg-white rounded-2xl shadow-xl p-8">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="text-2xl font-bold text-gray-900 mb-6">Deposit Instructions</h3>
+                        
+                        <div class="space-y-4 mb-6">
+                            <div class="flex items-start space-x-3">
+                                <div class="bg-indigo-600 text-white w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold">1</div>
+                                <div>
+                                    <p class="font-semibold text-gray-900">Open bKash App</p>
+                                    <p class="text-gray-600">Select "Send Money" option</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start space-x-3">
+                                <div class="bg-indigo-600 text-white w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold">2</div>
+                                <div>
+                                    <p class="font-semibold text-gray-900">Enter Payment Number</p>
+                                    <p class="text-gray-600 font-mono bg-gray-100 px-2 py-1 rounded">01641130020</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start space-x-3">
+                                <div class="bg-indigo-600 text-white w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold">3</div>
+                                <div>
+                                    <p class="font-semibold text-gray-900">Send Amount</p>
+                                    <p class="text-gray-600">Minimum: ৳1,280 (equivalent to $10 USD)</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start space-x-3">
+                                <div class="bg-indigo-600 text-white w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold">4</div>
+                                <div>
+                                    <p class="font-semibold text-gray-900">Submit Transaction ID</p>
+                                    <p class="text-gray-600">Enter the last 4 digits of your transaction ID below</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
+                            <div class="flex items-center space-x-2">
+                                <div class="text-yellow-600">⚠️</div>
+                                <p class="text-sm text-yellow-800">
+                                    <strong>Important:</strong> Minimum deposit is ৳1,280 BDT ($10 USD). 
+                                    Funds will be credited within 5-10 minutes after verification.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-2xl font-bold text-gray-900 mb-6">Confirm Your Deposit</h3>
+                        
+                        <form id="depositForm" class="space-y-6">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">
+                                    Deposit Amount (BDT)
+                                </label>
+                                <select class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+                                    <option value="1280">৳1,280 ($10 USD)</option>
+                                    <option value="2560">৳2,560 ($20 USD)</option>
+                                    <option value="6400">৳6,400 ($50 USD)</option>
+                                    <option value="12800">৳12,800 ($100 USD)</option>
+                                </select>
+                            </div>
+                            
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">
+                                    Your bKash Number
+                                </label>
+                                <input type="tel" placeholder="01XXXXXXXXX" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" required>
+                            </div>
+                            
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">
+                                    Last 4 Digits of Transaction ID
+                                </label>
+                                <input type="text" placeholder="XXXX" maxlength="4" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" required>
+                                <p class="text-sm text-gray-500 mt-1">Enter the last 4 digits from your bKash transaction receipt</p>
+                            </div>
+                            
+                            <button type="submit" class="w-full bg-green-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-green-700 transition-colors">
+                                Confirm Deposit
+                            </button>
+                        </form>
+                        
+                        <div class="mt-6 text-center">
+                            <p class="text-sm text-gray-500">
+                                Need help? Contact support: <a href="#" class="text-indigo-600 hover:underline">support@adearnpro.com</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section id="how-it-works" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">How The Platform Works</h2>
+                <p class="text-xl text-gray-600">Professional earning process in 4 simple steps</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="text-center">
+                    <div class="bg-indigo-600 text-white w-16 h-16 rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4">1</div>
+                    <h3 class="text-lg font-semibold mb-2">Account Setup</h3>
+                    <p class="text-gray-600">Create account with email verification and security setup</p>
+                </div>
+                
+                <div class="text-center">
+                    <div class="bg-indigo-600 text-white w-16 h-16 rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4">2</div>
+                    <h3 class="text-lg font-semibold mb-2">bKash Deposit</h3>
+                    <p class="text-gray-600">Fund your wallet via bKash Send Money (minimum ৳1,280)</p>
+                </div>
+                
+                <div class="text-center">
+                    <div class="bg-indigo-600 text-white w-16 h-16 rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4">3</div>
+                    <h3 class="text-lg font-semibold mb-2">View Premium Ads</h3>
+                    <p class="text-gray-600">Watch verified ads from premium partners and earn $0.05 per view</p>
+                </div>
+                
+                <div class="text-center">
+                    <div class="bg-indigo-600 text-white w-16 h-16 rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4">4</div>
+                    <h3 class="text-lg font-semibold mb-2">Secure Withdrawal</h3>
+                    <p class="text-gray-600">Withdraw earnings when you reach $50 minimum (15-day account age required)</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Security Section -->
+    <section id="security" class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h2 class="text-4xl font-bold text-gray-900 mb-6">Enterprise-Grade Security</h2>
+                    <p class="text-lg text-gray-600 mb-8">
+                        Your security and earnings are protected by advanced fraud detection 
+                        and compliance measures that meet international standards.
+                    </p>
+                    
+                    <div class="space-y-4">
+                        <div class="flex items-start space-x-3">
+                            <div class="text-green-500 text-xl">✓</div>
+                            <div>
+                                <h4 class="font-semibold text-gray-900">Advanced Anti-Fraud</h4>
+                                <p class="text-gray-600">AI-powered detection prevents automated viewing and fraud</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start space-x-3">
+                            <div class="text-green-500 text-xl">✓</div>
+                            <div>
+                                <h4 class="font-semibold text-gray-900">KYC Compliance</h4>
+                                <p class="text-gray-600">Identity verification for withdrawals above regulatory thresholds</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start space-x-3">
+                            <div class="text-green-500 text-xl">✓</div>
+                            <div>
+                                <h4 class="font-semibold text-gray-900">Encrypted Wallets</h4>
+                                <p class="text-gray-600">Military-grade encryption with multi-signature protection</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start space-x-3">
+                            <div class="text-green-500 text-xl">✓</div>
+                            <div>
+                                <h4 class="font-semibold text-gray-900">Complete Audit Trail</h4>
+                                <p class="text-gray-600">Every transaction logged with immutable proof-of-view records</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-gradient-to-br from-indigo-50 to-purple-50 p-8 rounded-2xl">
+                    <div class="text-center">
+                        <div class="text-6xl mb-4">🛡️</div>
+                        <h3 class="text-2xl font-bold text-gray-900 mb-4">Certified Platform</h3>
+                        <p class="text-gray-600 mb-6">
+                            Every transaction is monitored, every view is verified, and every user is protected 
+                            by our comprehensive security framework that exceeds industry standards.
+                        </p>
+                        <div class="bg-white p-4 rounded-lg shadow-sm">
+                            <div class="text-sm text-gray-500 mb-2">Security Rating</div>
+                            <div class="text-3xl font-bold text-green-600">A+</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20 gradient-bg text-white">
+        <div class="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
+            <h2 class="text-4xl font-bold mb-6">Ready to Start Professional Earning?</h2>
+            <p class="text-xl mb-8 text-gray-200">
+                Join our secure platform with instant bKash deposits and guaranteed payouts.
+            </p>
+            
+            <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-8 mb-8">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+                    <div>
+                        <div class="text-2xl font-bold text-yellow-300">৳1,280</div>
+                        <div class="text-sm text-gray-200">Minimum Deposit ($10)</div>
+                    </div>
+                    <div>
+                        <div class="text-2xl font-bold text-yellow-300">$50</div>
+                        <div class="text-sm text-gray-200">Minimum Withdrawal</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-2xl font-bold text-yellow-300">15 Days</div>
+                        <div class="text-sm text-gray-200">Account Age Required</div>
+                    </div>
+                </div>
+            </div>
+            
+            <button id="ctaDepositBtn" class="bg-yellow-400 text-gray-900 px-12 py-4 rounded-lg text-xl font-bold hover:bg-yellow-300 transition-colors pulse-animation">
+                Make Your First Deposit
+            </button>
+            
+            <p class="text-sm text-gray-300 mt-4">
+                Secure bKash integration • Transparent fees • Professional platform
+            </p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact" class="bg-gray-900 text-white py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <div class="text-2xl font-bold text-indigo-400 mb-4">AdEarn Pro</div>
+                    <p class="text-gray-400 mb-4">
+                        Professional platform for secure ad viewing and guaranteed earnings.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">📧</a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">📱</a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">💬</a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="font-semibold mb-4">Platform</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-white transition-colors">How It Works</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Security</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Deposit Guide</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Withdrawal</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-semibold mb-4">Support</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-white transition-colors">Help Center</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Contact Support</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Platform Status</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Report Issue</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-semibold mb-4">Legal</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-white transition-colors">Terms of Service</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Privacy Policy</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Compliance</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Refund Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-12 pt-8 text-center text-gray-400">
+                <p>&copy; 2024 AdEarn Pro. All rights reserved. Licensed and regulated earning platform.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Deposit Modal -->
+    <div id="depositModal" class="modal">
+        <div class="bg-white rounded-2xl shadow-2xl max-w-md w-full mx-4 p-8">
+            <div class="text-center mb-6">
+                <div class="text-4xl mb-4">💳</div>
+                <h3 class="text-2xl font-bold text-gray-900">Quick Deposit</h3>
+                <p class="text-gray-600">Make an instant bKash deposit to start earning</p>
+            </div>
+            
+            <div class="space-y-4 mb-6">
+                <div class="bg-green-50 border border-green-200 rounded-lg p-4">
+                    <p class="text-sm text-green-800">
+                        <strong>bKash Number:</strong> 01641130020<br>
+                        <strong>Minimum:</strong> ৳1,280 ($10 USD)
+                    </p>
+                </div>
+            </div>
+            
+            <div class="flex space-x-4">
+                <button onclick="scrollToDeposit()" class="flex-1 bg-green-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-green-700 transition-colors">
+                    Go to Deposit
+                </button>
+                <button onclick="closeModal()" class="flex-1 border border-gray-300 text-gray-700 py-3 px-6 rounded-lg font-semibold hover:bg-gray-50 transition-colors">
+                    Close
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add scroll effect to navigation
+        window.addEventListener('scroll', function() {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 100) {
+                nav.classList.add('bg-white/95', 'backdrop-blur-sm');
+            } else {
+                nav.classList.remove('bg-white/95', 'backdrop-blur-sm');
+            }
+        });
+
+        // Modal functions
+        function openModal() {
+            document.getElementById('depositModal').classList.add('show');
+        }
+
+        function closeModal() {
+            document.getElementById('depositModal').classList.remove('show');
+        }
+
+        function scrollToDeposit() {
+            closeModal();
+            document.getElementById('deposit').scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
+
+        // Deposit button handlers
+        document.getElementById('depositBtn').addEventListener('click', openModal);
+        document.getElementById('heroDepositBtn').addEventListener('click', openModal);
+        document.getElementById('ctaDepositBtn').addEventListener('click', openModal);
+
+        // Deposit form handler
+        document.getElementById('depositForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            const amount = this.querySelector('select').value;
+            const phone = this.querySelector('input[type="tel"]').value;
+            const transactionId = this.querySelector('input[type="text"]').value;
+            
+            if (phone && transactionId && transactionId.length === 4) {
+                alert(`✅ Deposit request submitted!\n\nAmount: ৳${amount}\nPhone: ${phone}\nTransaction ID: ****${transactionId}\n\nYour deposit will be processed within 5-10 minutes.`);
+                this.reset();
+            } else {
+                alert('❌ Please fill in all required fields correctly.');
+            }
+        });
+
+        // Close modal when clicking outside
+        document.getElementById('depositModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+
+        // Other button handlers
+        document.querySelectorAll('button').forEach(button => {
+            if (!button.id && !button.onclick && button.type !== 'submit') {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    if (this.textContent.includes('Dashboard')) {
+                        alert('🔐 Dashboard access requires account login.');
+                    } else if (this.textContent.includes('View Platform')) {
+                        alert('📊 Platform overview would show detailed features and statistics.');
+                    }
+                });
+            }
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'988bbe15e052b6db',t:'MTc1OTQ4NzIwMC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
